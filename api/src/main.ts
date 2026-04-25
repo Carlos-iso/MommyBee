@@ -15,7 +15,9 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  app.enableCors();
+  app.enableCors({
+    origin: '*',
+  });
   await app.listen(port, () => {
     console.log('Rodando na porta: ' + port);
   });
