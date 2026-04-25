@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  api:
+    build: ./api
+    container_name: api
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_USERNAME=carlosdev2022
+      - MONGODB_PASSWORD=z7ezt75mYiJjROfC
+      - NODE_ENV=VPS-MOMMYBEE
+      - CPF_BYPASS=true
+      - VITE_API_URL=http://167.234.249.170:3000 
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./front
+    container_name: frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+
+volumes:
+  mongo_data:

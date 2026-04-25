@@ -1,0 +1,22 @@
+FROM node:26.14.1
+
+# diretório da aplicação
+WORKDIR /api
+
+# copiar dependências
+COPY package*.json ./
+
+# instalar dependências
+RUN npm install
+
+# copiar resto do projeto
+COPY . .
+
+# build do Nest (gera dist/)
+RUN npm run build
+
+# expor porta padrão do Nest
+EXPOSE 3000
+
+# rodar versão buildada
+CMD ["npm", "run", "build:prod"]
