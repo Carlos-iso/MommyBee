@@ -1,7 +1,7 @@
 node_modules/
 .next/
-dist/
 build/
+dist/
 .env*
 *.log
 .DS_Store
@@ -9,7 +9,6 @@ build/
 coverage/
 
 # compiled output
-/dist
 /node_modules
 /build
 
@@ -48,6 +47,9 @@ lerna-debug.log*
 .claude
 .antigravity
 .opencode
+tsconfig.build.tsbuildinfo
+tsconfig.tsbuildinfo
+
 
 # dotenv environment variable files
 .env

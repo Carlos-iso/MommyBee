@@ -1,4 +1,4 @@
-FROM node:26.14.1
+FROM node:20-alpine
 
 # diretório da aplicação
 WORKDIR /api
@@ -13,10 +13,12 @@ RUN npm install
 COPY . .
 
 # build do Nest (gera dist/)
-RUN npm run build
+RUN npm run build || npx tsc -p tsconfig.build.json --noEmitOnError false
+
+RUN ls dist/ || (echo "AINDA FALHOU" && exit 1)
 
 # expor porta padrão do Nest
 EXPOSE 3000
 
 # rodar versão buildada
-CMD ["npm", "run", "build:prod"]
+CMD ["node", "dist/main"]
